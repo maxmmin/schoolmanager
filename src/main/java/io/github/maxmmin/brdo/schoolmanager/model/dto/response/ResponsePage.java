@@ -3,6 +3,7 @@ package io.github.maxmmin.brdo.schoolmanager.model.dto.response;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.function.Function;
@@ -20,5 +21,14 @@ public class ResponsePage<E> {
 
     public <V> ResponsePage<V> map(Function<E, V> mapper) {
         return new ResponsePage<>(number, size, elements, content.stream().map(mapper).toList(), totalElements, totalPages);
+    }
+
+    public ResponsePage(Page<E> page) {
+        number = page.getNumber();
+        size = page.getSize();
+        elements = page.getNumberOfElements();
+        content = page.getContent();
+        totalElements = page.getTotalElements();
+        totalPages = page.getTotalPages();
     }
 }

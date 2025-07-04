@@ -30,8 +30,7 @@ public class SchoolServiceImpl implements SchoolService {
     public ResponsePage<ResponseSchoolDto> getSchools(Pageable pageable, RequestSchoolFiltersDto filters) {
         Specification<School> spec = specificationBuilder.build(filters);
         Page<School> schools = schoolRepo.findAll(spec, pageable);
-        // @todo transform it to ResponsePage containing DTOs and return
-        return null;
+        return new ResponsePage<>(schools.map(schoolDtoMapper::mapToResponse));
     }
 
     @Override
