@@ -1,27 +1,18 @@
-import type {FC} from "react";
+import {type FC, useState} from "react";
 import type {School} from "../types/school.ts";
+import {SchoolTableTitlesRow} from "./SchoolTableTitlesRow.tsx";
 
-const SchoolTableRow: FC<School> = (school) => {
-    return (
-        <div className="school-table__row">
-            <div className="school-table__cell">{school.name}</div>
-            <div className="school-table__cell">{school.type}</div>
-            <div className="school-table__cell">{school.region}</div>
-            <div className={"school-table__cell"}>{school.active}</div>
-        </div>
-    )
-}
+
 
 export const SchoolsTable: FC = () => {
+    const [filters, setFilters] = useState<Partial<School>>({});
+
     return (
         <div className="school-table">
             <div className={"school-table__header school-table__row"}>
-                <div className="school-table__filters">
 
-                </div>
-                <div className="school-table__columns-titles school-table__row">
 
-                </div>
+                <SchoolTableTitlesRow/>
             </div>
 
             <div className="school-table__body">
