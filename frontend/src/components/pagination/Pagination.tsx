@@ -54,7 +54,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                     }}
                 />
 
-                <span>/ {totalPages} сторінок, всього записів: {totalElements}</span>
+                <span> / {totalPages} сторінок, всього записів: {totalElements}</span>
 
                 <button disabled={page >= totalPages} onClick={() => setPage(page + 1)} type="button">
                     Вперед

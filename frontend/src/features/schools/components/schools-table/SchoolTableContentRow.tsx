@@ -8,7 +8,7 @@ export const SchoolTableContentRow: FC<{school: School}> = ({school}) => {
             <div className="school-table__cell">{school.edrpou}</div>
             <div className="school-table__cell">{school.type}</div>
             <div className="school-table__cell">{school.region}</div>
-            <div className={"school-table__cell"}>{school.active}</div>
+            <div className="school-table__cell">{school.active}</div>
         </div>
     )
 }

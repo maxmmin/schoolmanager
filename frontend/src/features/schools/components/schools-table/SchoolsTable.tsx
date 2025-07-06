@@ -1,3 +1,4 @@
+import "./SchoolsTable.scss";
 import {type FC, useEffect, useState} from "react";
 import {SchoolTableTitlesRow} from "./SchoolTableTitlesRow.tsx";
 import type {SchoolFilters} from "../../types/school-filters.ts";
@@ -34,13 +35,19 @@ export const SchoolsTable: FC = () => {
                 ))}
             </div>
             <div className="school-table_footer">
-                <Pagination page={paginationOpts.page}
-                            size={paginationOpts.size}
-                            totalElements={schools.totalElements}
-                            totalPages={schools.totalPages}
-                            setPage={val => setPaginationOpts(prev => ({...prev, page: val}))}
-                            setSize={val => setPaginationOpts(prev => ({...prev, size: val}))}
-                />
+                {   schools.totalPages > 1 &&
+                    <Pagination page={paginationOpts.page}
+                                size={paginationOpts.size}
+                                totalElements={schools.totalElements}
+                                totalPages={schools.totalPages}
+                                setPage={val => setPaginationOpts(prev => ({...prev, page: val}))}
+                                setSize={val => setPaginationOpts(prev => ({...prev, size: val}))}
+                    />
+                }
+
+                {
+                    schools.elements == 0 && "За вашим запитом не знайдено жодної школи"
+                }
             </div>
         </div>
     )
