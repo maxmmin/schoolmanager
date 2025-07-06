@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 public class SchoolDtoMapper {
     public School mapToEntity(RequestSchoolDto requestSchoolDto) {
         School school = new School();
-        school.setId(requestSchoolDto.getId());
         school.setType(requestSchoolDto.getType());
         school.setRegion(requestSchoolDto.getRegion());
         school.setEdrpou(requestSchoolDto.getEdrpou());
