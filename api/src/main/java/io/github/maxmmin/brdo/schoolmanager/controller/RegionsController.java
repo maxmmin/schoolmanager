@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/v1/schools")
+@RequestMapping("/api/v1/regions")
 @RequiredArgsConstructor
 public class RegionsController {
     private final RegionProvider regionProvider;
