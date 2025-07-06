@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
+import {Schools} from "./pages/schools/Schools.tsx";
 
 function App() {
   return (
     <div className="wrapper">
         <Routes>
-            <Route path={"/schools"}/>
+            <Route path={"/schools"} element={<Schools/>}/>
+            <Route path={"/*"} element={<Navigate to={"/schools"} replace={true}/>}/>
         </Routes>
     </div>
   )

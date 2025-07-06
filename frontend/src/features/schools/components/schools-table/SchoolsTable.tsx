@@ -1,13 +1,13 @@
 import {type FC, useEffect, useState} from "react";
 import {SchoolTableTitlesRow} from "./SchoolTableTitlesRow.tsx";
-import type {SchoolFilters} from "../types/school-filters.ts";
+import type {SchoolFilters} from "../../types/school-filters.ts";
 import {SchoolTableFiltersRow} from "./SchoolTableFiltersRow.tsx";
-import type {PaginationOptions} from "../../../types/pagination-options.ts";
-import {Pagination} from "../../../components/pagination/Pagination.tsx";
-import type {ResponsePage} from "../../../types/response-page.ts";
-import type {School} from "../types/school.ts";
-import {Loader} from "../../../components/loader/Loader.tsx";
-import {fetchSchools} from "../services/schools-api.ts";
+import type {PaginationOptions} from "../../../../types/pagination-options.ts";
+import {Pagination} from "../../../../components/pagination/Pagination.tsx";
+import type {ResponsePage} from "../../../../types/response-page.ts";
+import type {School} from "../../types/school.ts";
+import {Loader} from "../../../../components/loader/Loader.tsx";
+import {fetchSchools} from "../../services/schools-api.ts";
 import {SchoolTableContentRow} from "./SchoolTableContentRow.tsx";
 
 
@@ -30,7 +30,7 @@ export const SchoolsTable: FC = () => {
             </div>
             <div className="school-table__body">
                 {schools.content.map(school => (
-                    <SchoolTableContentRow school={school}/>
+                    <SchoolTableContentRow key={school.id} school={school}/>
                 ))}
             </div>
             <div className="school-table_footer">

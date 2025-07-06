@@ -1,9 +1,9 @@
-import type {SchoolFilters} from "../types/school-filters.ts";
+import type {SchoolFilters} from "../../types/school-filters.ts";
 import {type ChangeEvent, type FC, useEffect, useState} from "react";
-import {schoolTypeLabels} from "../services/school-type-util.ts";
-import type {SchoolType} from "../types/school.ts";
-import {fetchRegions} from "../services/regions-api.ts";
-import {Loader} from "../../../components/loader/Loader.tsx";
+import {schoolTypeLabels} from "../../services/school-type-util.ts";
+import type {SchoolType} from "../../types/school.ts";
+import {fetchRegions} from "../../services/regions-api.ts";
+import {Loader} from "../../../../components/loader/Loader.tsx";
 
 type SchoolTableFiltersRowProps = {
     filters: SchoolFilters;
@@ -54,6 +54,7 @@ export const SchoolTableFiltersRow: FC<SchoolTableFiltersRowProps> = ({filters, 
 
     return (
         <div className="school-table__filters school-table__row">
+            <div className="school-table__cell"></div>
             <div className="school-table__cell"></div>
 
             <div className="school-table__cell">
