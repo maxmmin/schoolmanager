@@ -1,6 +1,6 @@
 package io.github.maxmmin.brdo.schoolmanager.service;
 
-import io.github.maxmmin.brdo.schoolmanager.exception.BadOperationException;
+import io.github.maxmmin.brdo.schoolmanager.exception.IllegalOperationException;
 import io.github.maxmmin.brdo.schoolmanager.exception.NonExistingEntityOperationException;
 import io.github.maxmmin.brdo.schoolmanager.model.dto.request.RequestSchoolDto;
 import io.github.maxmmin.brdo.schoolmanager.model.dto.request.RequestSchoolFiltersDto;
@@ -8,7 +8,6 @@ import io.github.maxmmin.brdo.schoolmanager.model.dto.response.ResponsePage;
 import io.github.maxmmin.brdo.schoolmanager.model.dto.response.ResponseSchoolDto;
 import io.github.maxmmin.brdo.schoolmanager.model.entity.School;
 import io.github.maxmmin.brdo.schoolmanager.repository.SchoolRepo;
-import jakarta.validation.Path;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -44,7 +43,7 @@ public class SchoolServiceImpl implements SchoolService {
     @Transactional
     public void deactivateSchool(long id) {
         School school = schoolRepo.findByIdWithLock(id).orElseThrow(NonExistingEntityOperationException::new);
-        if (!school.isActive()) throw new BadOperationException("School is already deactivated");
+        if (!school.isActive()) throw new IllegalOperationException("School is already deactivated");
         school.setActive(false);
         schoolRepo.save(school);
     }

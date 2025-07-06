@@ -1,4 +1,4 @@
 package io.github.maxmmin.brdo.schoolmanager.exception;
 
-public class NonExistingEntityOperationException extends BadOperationException {
+public class NonExistingEntityOperationException extends IllegalOperationException {
 }
