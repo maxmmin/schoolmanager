@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application.name: schoolmanager
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+    open-in-view: false
+    show-sql: false
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+    password: ${spring.datasource.password}
+    user: ${spring.datasource.username}
+
+  sql:
+    init:
+      mode: always
+
+  datasource:
+    username: ${org.mxmn.db.username}
+    password: ${org.mxmn.db.password}
+    url: jdbc:postgresql://${org.mxmn.db.host}:${org.mxmn.db.port}/${org.mxmn.db.name}
+    driver-class-name: org.postgresql.Driver
+
+  error:
+    whitelabel:
+      enabled: false
