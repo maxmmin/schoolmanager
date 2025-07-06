@@ -1,14 +1,14 @@
 import type {SchoolFilters} from "../types/school-filters.ts";
-import {type FC, useEffect, useMemo, useState} from "react";
+import {type ChangeEvent, type FC, useEffect, useMemo, useState} from "react";
 import {schoolTypeLabels} from "../services/school-type-util.ts";
 import type {SchoolType} from "../types/school.ts";
 import {fetchRegions} from "../services/schools-api.ts";
 import {Loader} from "../../../components/loader/Loader.tsx";
 
 type SchoolTableFiltersRowProps = {
-    filters: Partial<SchoolFilters>;
+    filters: SchoolFilters;
     setFilters: (
-        filters: Partial<SchoolFilters> | ((prev: Partial<SchoolFilters>) => Partial<SchoolFilters>)
+        filters: SchoolFilters | ((prev: SchoolFilters) => SchoolFilters)
     ) => void
 }
 
@@ -23,6 +23,33 @@ export const SchoolTableFiltersRow: FC<SchoolTableFiltersRowProps> = ({filters, 
         setFilters(prev => ({...prev, [key]: value}))
     }
 
+    function onTypeFilterChange(e: ChangeEvent<HTMLSelectElement>) {
+        setFilter("type", e.currentTarget.value as SchoolType || undefined);
+    }
+
+    function onRegionFilterChange(e: ChangeEvent<HTMLSelectElement>) {
+        setFilter("region", e.currentTarget.value || undefined);
+    }
+
+    function onActiveFilterChange(e: ChangeEvent<HTMLSelectElement>) {
+        const val = e.target.value;
+        let newFilter: boolean | undefined;
+        switch (val) {
+            case "1":
+                newFilter = true;
+                break;
+            case "2":
+                newFilter = false;
+                break;
+            case "":
+                newFilter = undefined;
+                break;
+            default:
+                throw new Error("Unexpected value: " + val);
+        }
+        setFilter("active", newFilter);
+    }
+
     if (!regions) return <Loader/>
 
     return (
@@ -32,7 +59,7 @@ export const SchoolTableFiltersRow: FC<SchoolTableFiltersRowProps> = ({filters, 
             <div className="school-table__cell">
                 <select
                     value={filters.type}
-                    onChange={(e) => setFilter("type", e.currentTarget.value as SchoolType)}
+                    onChange={onTypeFilterChange}
                 >
                     <option value="">Усі типи</option>
                     {Object.entries(schoolTypeLabels).map(([key, label]) => (
@@ -44,7 +71,26 @@ export const SchoolTableFiltersRow: FC<SchoolTableFiltersRowProps> = ({filters, 
             </div>
 
             <div className="school-table__cell">
-                <input type="text"/>
+                <select value={filters.region}
+                        onChange={onRegionFilterChange}>
+                    <option value="">Усі регіони</option>
+                    {regions.map((region) => (
+                        <option key={region} value={region}>
+                            {region}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            <div className={"school-table__cell"}>
+                <select
+                    value={filters.active + ""}
+                    onChange={onActiveFilterChange}
+                >
+                    <option value="">Усі</option>
+                    <option value="1">Активні</option>
+                    <option value="0">Неактивні</option>
+                </select>
             </div>
         </div>
     )
