@@ -2,6 +2,9 @@ import type {SchoolFilters} from "../types/school-filters.ts";
 import type {ResponsePage} from "../../../types/response-page.ts";
 import type {School} from "../types/school.ts";
 import type {PaginationOptions} from "../../../types/pagination-options.ts";
+import type {SchoolFormData} from "../types/school-form-data.ts";
+import {getErrorMessage} from "../../../utils/get-error-message.ts";
+import type {ErrorResponse} from "../../../types/error-response.ts";
 
 const SCHOOLS_API_ROOT = `${import.meta.env.VITE_API_ROOT}/schools`;
 
@@ -13,5 +16,23 @@ export async function fetchSchools(paginationOpts: PaginationOptions, filters: S
     if (filters.region !== undefined) queryParams.set("region", filters.region);
     if (filters.active !== undefined) queryParams.set("active", filters.active + "");
     const response = await fetch(`${SCHOOLS_API_ROOT}?${queryParams.toString()}`);
+    return await response.json();
+}
+
+export async function createSchool(schoolData: SchoolFormData): Promise<School> {
+    const response = await fetch(SCHOOLS_API_ROOT, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(schoolData),
+    });
+
+    if (!response.ok) {
+        const error = await response.json() as ErrorResponse;
+        const msg = getErrorMessage(error);
+        throw new Error(msg);
+    }
+
     return await response.json();
 }
