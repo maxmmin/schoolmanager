@@ -29,9 +29,9 @@ spring:
       mode: always
 
   datasource:
-    username: ${org.mxmn.db.username}
-    password: ${org.mxmn.db.password}
-    url: jdbc:postgresql://${org.mxmn.db.host}:${org.mxmn.db.port}/${org.mxmn.db.name}
+    username: ${io.mxmn.schoolmanager.db.username}
+    password: ${io.mxmn.schoolmanager.db.password}
+    url: jdbc:postgresql://${io.mxmn.schoolmanager.db.host}:${io.mxmn.schoolmanager.db.port}/${io.mxmn.schoolmanager.db.name}
     driver-class-name: org.postgresql.Driver
 
   error:

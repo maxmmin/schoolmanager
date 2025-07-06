@@ -1,0 +1,41 @@
+services:
+  api:
+    build:
+      context: ./api/
+      target: development
+#    target: final
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - "$APP_DATA:/output"
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+      - "9010:9010"
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres
+    command: -c config_file=/etc/postgresql.conf
+    container_name: ${PG_SERVERNAME}
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - PG_SERVERNAME=$PG_SERVERNAME
+      - PG_SERVERPORT=$PG_SERVERPORT
+      - POSTGRES_DB=$POSTGRES_DB
+    volumes:
+      - "$APP_DATABASE_DATA:/var/lib/postgresql/data"
+      - "./postgresql.conf:/etc/postgresql.conf"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    expose:
+      - "5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "$POSTGRES_USER", "-d", "$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
