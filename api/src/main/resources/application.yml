@@ -7,6 +7,9 @@ server:
       enabled: true
       force: true
 
+  error.whitelabel:
+      enabled: false
+
 spring:
   application.name: schoolmanager
 
@@ -33,7 +36,3 @@ spring:
     password: ${io.mxmn.schoolmanager.db.password}
     url: jdbc:postgresql://${io.mxmn.schoolmanager.db.host}:${io.mxmn.schoolmanager.db.port}/${io.mxmn.schoolmanager.db.name}
     driver-class-name: org.postgresql.Driver
-
-  error:
-    whitelabel:
-      enabled: false
