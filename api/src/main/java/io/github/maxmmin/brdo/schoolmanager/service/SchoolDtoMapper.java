@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class SchoolDtoMapper {
     public School mapToEntity(RequestSchoolDto requestSchoolDto) {
         School school = new School();
+        school.setName(requestSchoolDto.getName());
         school.setType(requestSchoolDto.getType());
         school.setRegion(requestSchoolDto.getRegion());
         school.setEdrpou(requestSchoolDto.getEdrpou());
@@ -18,6 +19,7 @@ public class SchoolDtoMapper {
     public ResponseSchoolDto mapToResponse(School school) {
         return ResponseSchoolDto.builder()
                 .id(school.getId())
+                .name(school.getName())
                 .type(school.getType().name())
                 .region(school.getRegion())
                 .active(school.isActive())

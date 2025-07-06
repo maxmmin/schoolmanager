@@ -1,9 +1,10 @@
 CREATE SEQUENCE schools_seq START WITH 1 INCREMENT BY 50;
 
 CREATE TABLE schools (
-                         id BIGSERIAL PRIMARY KEY,
-                         edrpou VARCHAR NOT NULL,
-                         region VARCHAR NOT NULL,
-                         type varchar(64) NOT NULL CHECK (type IN ('GYMNASIUM', 'LYCEUM', 'SECONDARY_SCHOOL')),
-                         is_active BOOLEAN NOT NULL DEFAULT TRUE
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(128) NOT NULL,
+    edrpou VARCHAR(8) NOT NULL,
+    region VARCHAR NOT NULL,
+    type varchar(64) NOT NULL CHECK (type IN ('GYMNASIUM', 'LYCEUM', 'SECONDARY_SCHOOL')),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE
 );

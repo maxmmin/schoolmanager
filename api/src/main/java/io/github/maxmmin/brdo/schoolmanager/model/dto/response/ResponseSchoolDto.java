@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ResponseSchoolDto {
     private final Long id;
+    private final String name;
     private final String edrpou;
     private final String region;
     private final String type;
