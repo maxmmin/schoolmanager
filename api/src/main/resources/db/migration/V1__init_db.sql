@@ -1,3 +1,5 @@
+CREATE SEQUENCE schools_seq START WITH 0 INCREMENT BY 50;
+
 CREATE TABLE schools (
                          id BIGSERIAL PRIMARY KEY,
                          edrpou VARCHAR NOT NULL,
