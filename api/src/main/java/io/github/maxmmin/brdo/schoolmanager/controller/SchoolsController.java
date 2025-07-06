@@ -10,22 +10,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/schools")
 @RequiredArgsConstructor
 public class SchoolsController {
     private final SchoolService schoolService;
 
-    @GetMapping("/schools")
+    @GetMapping("")
     public ResponsePage<ResponseSchoolDto> getAllSchools(Pageable pageable, @ModelAttribute RequestSchoolFiltersDto filters) {
         return schoolService.getSchools(pageable, filters);
     }
 
-    @PostMapping("/schools")
+    @PostMapping("")
     public ResponseSchoolDto createSchool(@RequestBody RequestSchoolDto requestSchoolDto) {
         return schoolService.createSchool(requestSchoolDto);
     }
 
-    @PatchMapping("/schools/{id}")
+    @PatchMapping("/{id}")
     public void deactivateSchool(@PathVariable("id") long schoolId) {
         schoolService.deactivateSchool(schoolId);
     }
