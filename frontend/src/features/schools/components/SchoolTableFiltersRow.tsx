@@ -1,8 +1,8 @@
 import type {SchoolFilters} from "../types/school-filters.ts";
-import {type ChangeEvent, type FC, useEffect, useMemo, useState} from "react";
+import {type ChangeEvent, type FC, useEffect, useState} from "react";
 import {schoolTypeLabels} from "../services/school-type-util.ts";
 import type {SchoolType} from "../types/school.ts";
-import {fetchRegions} from "../services/schools-api.ts";
+import {fetchRegions} from "../services/regions-api.ts";
 import {Loader} from "../../../components/loader/Loader.tsx";
 
 type SchoolTableFiltersRowProps = {

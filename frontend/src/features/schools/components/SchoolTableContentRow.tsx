@@ -1,7 +1,7 @@
 import type {FC} from "react";
 import type {School} from "../types/school.ts";
 
-export const SchoolTableContentRow: FC<School> = (school) => {
+export const SchoolTableContentRow: FC<{school: School}> = ({school}) => {
     return (
         <div className="school-table__row school-table__row_content">
             <div className="school-table__cell">{school.name}</div>
