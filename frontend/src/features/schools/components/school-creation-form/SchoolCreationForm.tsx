@@ -11,7 +11,10 @@ function validateForm(schoolData: SchoolFormData): SchoolFormErrors {
     const newErrors: SchoolFormErrors = {};
 
     if (!schoolData.name || schoolData.name.trim() === "") newErrors.name = "Назва обов'язкова";
+
     if (!schoolData.edrpou || schoolData.edrpou.trim() === "") newErrors.edrpou = "ЄДРПОУ обов'язковий";
+    else if (schoolData.edrpou.length !== 8) newErrors.edrpou = "ЄДРПОУ повинен складатись з 8 символів";
+
     if (!schoolData.type) newErrors.type = "Тип школи обов'язковий";
     if (!schoolData.region) newErrors.region = "Регіон обов'язковий";
 
