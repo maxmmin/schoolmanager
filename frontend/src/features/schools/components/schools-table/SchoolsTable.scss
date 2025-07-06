@@ -1,6 +1,5 @@
 .school-table {
   max-width: 1440px;
-  padding: 1rem 2rem;
   border: 1px solid gray;
 }
 
@@ -8,8 +7,10 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   column-gap: 1rem;
+  outline: 1px solid gray;
+  padding: 1rem 2rem;
 }
 
 .school-table__row + .school-table__row {
-  margin-top: 0.25rem;
+  margin-top: 1px;
 }

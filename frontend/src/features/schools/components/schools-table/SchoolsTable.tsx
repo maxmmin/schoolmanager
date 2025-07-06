@@ -25,30 +25,24 @@ export const SchoolsTable: FC = () => {
 
     return (
         <div className="school-table">
-            <div className="school-table__header">
-                <SchoolTableTitlesRow/>
-                <SchoolTableFiltersRow filters={filters} setFilters={setFilters}/>
-            </div>
-            <div className="school-table__body">
-                {schools.content.map(school => (
-                    <SchoolTableContentRow key={school.id} school={school}/>
-                ))}
-            </div>
-            <div className="school-table_footer">
-                {   schools.totalPages > 1 &&
-                    <Pagination page={paginationOpts.page}
-                                size={paginationOpts.size}
-                                totalElements={schools.totalElements}
-                                totalPages={schools.totalPages}
-                                setPage={val => setPaginationOpts(prev => ({...prev, page: val}))}
-                                setSize={val => setPaginationOpts(prev => ({...prev, size: val}))}
-                    />
-                }
+            <SchoolTableTitlesRow/>
+            <SchoolTableFiltersRow filters={filters} setFilters={setFilters}/>
+            {schools.content.map(school => (
+                <SchoolTableContentRow key={school.id} school={school}/>
+            ))}
+            {   schools.totalPages > 1 &&
+                <Pagination page={paginationOpts.page}
+                            size={paginationOpts.size}
+                            totalElements={schools.totalElements}
+                            totalPages={schools.totalPages}
+                            setPage={val => setPaginationOpts(prev => ({...prev, page: val}))}
+                            setSize={val => setPaginationOpts(prev => ({...prev, size: val}))}
+                />
+            }
 
-                {
-                    schools.elements == 0 && "За вашим запитом не знайдено жодної школи"
-                }
-            </div>
+            {
+                schools.elements == 0 && <p style={{"padding": "0 1rem"}}>За вашим запитом не знайдено жодної школи</p>
+            }
         </div>
     )
 }
