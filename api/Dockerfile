@@ -6,7 +6,7 @@ COPY .mvn/ .mvn/
 
 RUN --mount=type=bind,source=pom.xml,target=pom.xml \
     --mount=type=cache,target=/root/.m2 \
-    ./mvnw -s /build/.mvn/settings.xml -DskipTests \
+    ./mvnw -DskipTests \
     dependency:go-offline
 
 FROM deps as package
