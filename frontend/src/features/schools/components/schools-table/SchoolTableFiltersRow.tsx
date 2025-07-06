@@ -32,13 +32,13 @@ export const SchoolTableFiltersRow: FC<SchoolTableFiltersRowProps> = ({filters, 
     }
 
     function onActiveFilterChange(e: ChangeEvent<HTMLSelectElement>) {
-        const val = e.target.value;
+        const val = e.currentTarget.value;
         let newFilter: boolean | undefined;
         switch (val) {
-            case "1":
+            case "true":
                 newFilter = true;
                 break;
-            case "2":
+            case "false":
                 newFilter = false;
                 break;
             case "":
@@ -89,8 +89,8 @@ export const SchoolTableFiltersRow: FC<SchoolTableFiltersRowProps> = ({filters, 
                     onChange={onActiveFilterChange}
                 >
                     <option value="">Усі</option>
-                    <option value="1">Активні</option>
-                    <option value="0">Неактивні</option>
+                    <option value="true">Активні</option>
+                    <option value="false">Неактивні</option>
                 </select>
             </div>
         </div>
