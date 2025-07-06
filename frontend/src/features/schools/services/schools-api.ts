@@ -27,7 +27,6 @@ export async function createSchool(schoolData: SchoolFormData): Promise<School> 
         },
         body: JSON.stringify(schoolData),
     });
-
     if (!response.ok) {
         const error = await response.json() as ErrorResponse;
         const msg = getErrorMessage(error);

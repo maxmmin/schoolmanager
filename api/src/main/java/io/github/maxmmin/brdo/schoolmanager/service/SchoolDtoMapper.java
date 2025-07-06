@@ -12,7 +12,6 @@ public class SchoolDtoMapper {
         school.setId(requestSchoolDto.getId());
         school.setType(requestSchoolDto.getType());
         school.setRegion(requestSchoolDto.getRegion());
-        school.setActive(requestSchoolDto.getActive());
         school.setEdrpou(requestSchoolDto.getEdrpou());
         return school;
     }

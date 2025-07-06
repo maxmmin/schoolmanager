@@ -3,7 +3,7 @@ import {fetchRegions} from "../../services/regions-api.ts";
 import type {SchoolFormData} from "../../types/school-form-data.ts";
 import {createSchool} from "../../services/schools-api.ts";
 import {Loader} from "../../../../components/loader/Loader.tsx";
-import type {SchoolType} from "../../types/school.ts";
+import type {School, SchoolType} from "../../types/school.ts";
 
 type SchoolFormErrors = Partial<Record<keyof SchoolFormData, string>>;
 
@@ -18,7 +18,11 @@ function validateForm(schoolData: SchoolFormData): SchoolFormErrors {
     return newErrors;
 }
 
-export const SchoolCreationForm: React.FC = () => {
+export type SchoolCreationFormProps = {
+    onCreationSuccess: (school: School) => unknown;
+}
+
+export const SchoolCreationForm: React.FC<SchoolCreationFormProps> = ({onCreationSuccess}) => {
     const [pending, setPending] = useState<boolean>(false);
     const [schoolData, setSchoolData] = useState<SchoolFormData>({});
     const [regions, setRegions] = useState<string[]>([]);
@@ -46,7 +50,8 @@ export const SchoolCreationForm: React.FC = () => {
         if (Object.keys(errors).length === 0) {
             setPending(true)
             try {
-                await createSchool(schoolData);
+                const school = await createSchool(schoolData);
+                onCreationSuccess(school);
             } catch (error) {
                 console.error("An error occurred during school creation", e);
                 setRequestError((error as Error).message);
@@ -108,17 +113,6 @@ export const SchoolCreationForm: React.FC = () => {
                     ))}
                 </select>
                 {errors.region && <div style={{ color: "red" }}>{errors.region}</div>}
-            </div>
-
-            <div>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={schoolData.active ?? true}
-                        onChange={(e) => onFormChange("active", e.target.checked)}
-                    />
-                    Активна
-                </label>
             </div>
 
             <button type="submit">Створити</button>
