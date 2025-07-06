@@ -1,0 +1,21 @@
+.school-creation-form {
+  width: 300px;
+  border: 1px solid gray;
+  padding: 1rem 2rem;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 0.25rem;
+    flex-wrap: wrap;
+
+    > input, select {
+      width: 50%;
+      margin: 0;
+    }
+  }
+
+  > * + * {
+    margin-top: 0.5rem;
+  }
+}

@@ -4,6 +4,7 @@ import type {SchoolFormData} from "../../types/school-form-data.ts";
 import {createSchool} from "../../services/schools-api.ts";
 import {Loader} from "../../../../components/loader/Loader.tsx";
 import type {School, SchoolType} from "../../types/school.ts";
+import "./SchoolCreationForm.scss";
 
 type SchoolFormErrors = Partial<Record<keyof SchoolFormData, string>>;
 
@@ -67,7 +68,7 @@ export const SchoolCreationForm: React.FC<SchoolCreationFormProps> = ({onCreatio
     if (pending) return <Loader/>
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={"school-creation-form"} onSubmit={handleSubmit}>
             <div>
                 <label>Назва школи:</label>
                 <input

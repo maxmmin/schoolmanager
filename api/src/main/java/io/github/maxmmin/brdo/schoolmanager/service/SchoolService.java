@@ -9,9 +9,12 @@ import io.github.maxmmin.brdo.schoolmanager.model.dto.response.ResponseSchoolDto
 import io.github.maxmmin.brdo.schoolmanager.model.entity.School;
 import io.github.maxmmin.brdo.schoolmanager.repository.SchoolRepo;
 import jakarta.validation.Valid;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +30,7 @@ public class SchoolService {
 
     public ResponsePage<ResponseSchoolDto> getSchools(Pageable pageable, RequestSchoolFiltersDto filters) {
         Specification<School> spec = specificationBuilder.build(filters);
+        if (pageable.getSort().isUnsorted()) pageable = withSort(pageable, Sort.by(Sort.Direction.DESC, "id"));
         Page<School> schools = schoolRepo.findAll(spec, pageable);
         return new ResponsePage<>(schools.map(schoolDtoMapper::mapToResponse));
     }
@@ -43,5 +47,9 @@ public class SchoolService {
         if (!school.isActive()) throw new IllegalOperationException("School is already deactivated");
         school.setActive(false);
         schoolRepo.save(school);
+    }
+
+    private PageRequest withSort(Pageable pageable, Sort sort) {
+        return PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
     }
 }
