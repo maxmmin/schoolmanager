@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/regions")
@@ -15,7 +15,7 @@ public class RegionsController {
     private final RegionProvider regionProvider;
 
     @GetMapping("")
-    public Set<String> getAllRegions() {
+    public List<String> getAllRegions() {
         return regionProvider.getAllRegions();
     }
 }
