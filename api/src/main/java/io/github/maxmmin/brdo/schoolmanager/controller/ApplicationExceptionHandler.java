@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NonExistingEntityOperationException.class)
     public ErrorResponse handleNonExistingEntityOperationException(NonExistingEntityOperationException ex) {
-        String defaultMsg = "Illegal operation: operation entity seems to not exist";
+        String defaultMsg = "Illegal operation: entity not found";
         return ErrorResponse.builder(ex, HttpStatus.BAD_REQUEST, defaultMsg).build();
     }
 
