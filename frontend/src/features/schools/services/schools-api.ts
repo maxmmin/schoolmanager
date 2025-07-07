@@ -5,8 +5,9 @@ import type {PaginationOptions} from "../../../types/pagination-options.ts";
 import type {SchoolFormData} from "../types/school-form-data.ts";
 import {getErrorMessage} from "../../../utils/get-error-message.ts";
 import type {ErrorResponse} from "../../../types/error-response.ts";
+import {env} from "../../../env.ts";
 
-const SCHOOLS_API_ROOT = `${import.meta.env.VITE_API_ROOT}/schools`;
+const SCHOOLS_API_ROOT = `${env.API_ROOT}/api/v1/schools`;
 
 export async function fetchSchools(paginationOpts: PaginationOptions, filters: SchoolFilters): Promise<ResponsePage<School>> {
     const queryParams = new URLSearchParams();
