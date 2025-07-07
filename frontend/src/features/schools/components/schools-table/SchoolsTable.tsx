@@ -46,7 +46,9 @@ export const SchoolsTable: FC = () => {
             {schools.content.map(school => (
                 <SchoolTableContentRow key={school.id} school={school} onSchoolDeactivationCall={s => setSchoolDeactivationModalProps({school: s, visible: true})}/>
             ))}
-            {   schools.totalPages > 1 &&
+
+            {
+                schools.elements > 0 &&
                 <Pagination page={paginationOpts.page}
                             size={paginationOpts.size}
                             totalElements={schools.totalElements}

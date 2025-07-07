@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Pagination.scss";
 
 type PaginationProps = {
     totalElements: number;
@@ -17,7 +18,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                                                    setPage,
                                                    setSize,
                                                }) => {
-    const [inputPage, setInputPage] = useState(page);
+    const [inputPage, setInputPage] = useState(page + 1);
 
     const onChangePageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = Number(e.target.value);
@@ -25,19 +26,19 @@ export const Pagination: React.FC<PaginationProps> = ({
     };
 
     const goToPage = () => {
-        if (inputPage >= 1 && inputPage <= totalPages) {
-            setPage(inputPage);
-        } else {
-            setInputPage(page);
+        if (inputPage >= 0 && inputPage <= totalPages - 1) {
+            setPage(inputPage - 1);
         }
     };
 
     return (
-        <div>
-            <div>
-                <button disabled={page <= 1} onClick={() => setPage(page - 1)} type="button">
+        <div className={"pagination-container"}>
+            <div className={"pagination-container__page-number-selector"}>
+                <button disabled={page <= 0} onClick={() => setPage(page - 1)} type="button">
                     Назад
                 </button>
+
+                <p style={{"margin": 0}}>Сторінка</p>
 
                 <input
                     type="number"
@@ -54,14 +55,14 @@ export const Pagination: React.FC<PaginationProps> = ({
                     }}
                 />
 
-                <span> / {totalPages} сторінок, всього записів: {totalElements}</span>
+                <span> / {totalPages}</span>
 
-                <button disabled={page >= totalPages} onClick={() => setPage(page + 1)} type="button">
+                <button disabled={page >= totalPages - 1} onClick={() => setPage(page + 1)} type="button">
                     Вперед
                 </button>
             </div>
 
-            <div>
+            <div className={"pagination-container__page-size-selector"}>
                 <label>
                     Кількість на сторінку:{" "}
                     <select value={size} onChange={(e) => setSize(Number(e.target.value))}>
@@ -73,6 +74,10 @@ export const Pagination: React.FC<PaginationProps> = ({
                     </select>
                 </label>
             </div>
+
+            <p className="pagination-container__total-records">
+                Всього записів: {totalElements}
+            </p>
         </div>
     );
 };
