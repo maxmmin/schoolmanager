@@ -1,0 +1,36 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(black, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container.visible {
+  opacity: 100%;
+  pointer-events: auto;
+}
+
+.modal-card {
+  width: 400px;
+  background: white;
+  padding: 1rem;
+}
+
+.modal-card-buttons {
+  margin-left: auto;
+  width: fit-content;
+}
+
+
+.modal-card-buttons > button + button {
+  margin-left: 0.5rem;
+}

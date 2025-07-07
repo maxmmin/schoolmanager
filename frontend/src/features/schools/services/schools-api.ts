@@ -35,3 +35,12 @@ export async function createSchool(schoolData: SchoolFormData): Promise<School> 
 
     return await response.json();
 }
+
+export async function deactivateSchool(id: number): Promise<void> {
+    const response = await fetch(`${SCHOOLS_API_ROOT}/${id}`, {method: "PATCH"});
+    if (!response.ok) {
+        const error = await response.json() as ErrorResponse;
+        const msg = getErrorMessage(error);
+        throw new Error(msg);
+    }
+}

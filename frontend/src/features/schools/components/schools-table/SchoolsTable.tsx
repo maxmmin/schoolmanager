@@ -8,27 +8,43 @@ import {Pagination} from "../../../../components/pagination/Pagination.tsx";
 import type {ResponsePage} from "../../../../types/response-page.ts";
 import type {School} from "../../types/school.ts";
 import {Loader} from "../../../../components/loader/Loader.tsx";
-import {fetchSchools} from "../../services/schools-api.ts";
+import {deactivateSchool, fetchSchools} from "../../services/schools-api.ts";
 import {SchoolTableContentRow} from "./SchoolTableContentRow.tsx";
+import {Modal} from "../../../../components/modal/Modal.tsx";
 
+type SchoolDeactivationModalProps = {
+    visible: boolean;
+    school: School | null;
+}
 
 export const SchoolsTable: FC = () => {
+    const [pending, setPending] = useState<boolean>(true);
     const [filters, setFilters] = useState<SchoolFilters>({});
     const [schools, setSchools] = useState<ResponsePage<School> | null>(null);
     const [paginationOpts, setPaginationOpts] = useState<PaginationOptions>({page: 0, size: 5});
 
+    const [schoolDeactivationModalProps, setSchoolDeactivationModalProps] = useState<SchoolDeactivationModalProps>({
+        visible: false,
+        school: null
+    });
+
     useEffect(() => {
-        fetchSchools(paginationOpts, filters).then(setSchools);
+        setPending(true);
+        fetchSchools(paginationOpts, filters)
+            .then(setSchools)
+            .finally(() => setPending(false));
     }, [paginationOpts, filters])
 
-    if (!schools) return <Loader/>
+    if (pending) return <Loader/>;
+
+    if (!schools) throw new Error("Schools must not be null");
 
     return (
         <div className="school-table">
             <SchoolTableTitlesRow/>
             <SchoolTableFiltersRow filters={filters} setFilters={setFilters}/>
             {schools.content.map(school => (
-                <SchoolTableContentRow key={school.id} school={school}/>
+                <SchoolTableContentRow key={school.id} school={school} onSchoolDeactivationCall={s => setSchoolDeactivationModalProps({school: s, visible: true})}/>
             ))}
             {   schools.totalPages > 1 &&
                 <Pagination page={paginationOpts.page}
@@ -43,6 +59,22 @@ export const SchoolsTable: FC = () => {
             {
                 schools.elements == 0 && <p style={{"padding": "0 1rem"}}>За вашим запитом не знайдено жодної школи</p>
             }
+
+            <Modal visible={schoolDeactivationModalProps.visible}
+                   text={`Ви впевнені, що хочете деактивувати школу ${schoolDeactivationModalProps.school?.name}?`}
+                   onConfirm={async () => {
+                       setPending(true);
+                       try {
+                           const school = schoolDeactivationModalProps.school!;
+                           await deactivateSchool(school.id);
+                           await fetchSchools(paginationOpts, filters).then(setSchools);
+                           setSchoolDeactivationModalProps(prev => ({...prev, visible: false}));
+                       } finally {
+                           setPending(false);
+                       }
+                   }}
+                   onCancel={() => setSchoolDeactivationModalProps(prev => ({...prev, visible: false}))}
+            />
         </div>
     )
 }
