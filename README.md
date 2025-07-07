@@ -4,7 +4,8 @@
 - Schools creation
 - Server-side schools filtering via Spring Data Specification API 
 - Server-side schools pagination
-- Schools deactivation 
+- Schools deactivation
+- React routing
 - Docker configuration with NGINX as gateway, no direct API exposure required
 - Database migrations via Flyway
 
