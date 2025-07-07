@@ -32,7 +32,7 @@ spring:
       mode: always
 
   datasource:
-    username: ${io.mxmn.schoolmanager.db.username}
-    password: ${io.mxmn.schoolmanager.db.password}
-    url: jdbc:postgresql://${io.mxmn.schoolmanager.db.host}:${io.mxmn.schoolmanager.db.port}/${io.mxmn.schoolmanager.db.name}
+    username: ${io.github.mxmn.schoolmanager.db.username}
+    password: ${io.github.mxmn.schoolmanager.db.password}
+    url: jdbc:postgresql://${io.github.mxmn.schoolmanager.db.host}:${io.github.mxmn.schoolmanager.db.port}/${io.github.mxmn.schoolmanager.db.name}
     driver-class-name: org.postgresql.Driver
