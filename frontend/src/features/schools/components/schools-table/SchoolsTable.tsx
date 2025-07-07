@@ -28,12 +28,14 @@ export const SchoolsTable: FC = () => {
         school: null
     });
 
+    useEffect(() => setPaginationOpts(prev => ({...prev, page: 0})), [filters])
+
     useEffect(() => {
         setPending(true);
         fetchSchools(paginationOpts, filters)
             .then(setSchools)
             .finally(() => setPending(false));
-    }, [paginationOpts, filters])
+    }, [paginationOpts])
 
     if (pending) return <Loader/>;
 
