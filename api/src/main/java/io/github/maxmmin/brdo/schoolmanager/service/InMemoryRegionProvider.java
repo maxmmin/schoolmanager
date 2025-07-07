@@ -2,11 +2,12 @@ package io.github.maxmmin.brdo.schoolmanager.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
 public class InMemoryRegionProvider implements RegionProvider {
-    private final Set<String> regions = Set.of(
+    private final List<String> regions = List.of(
             "Вінницька",
             "Волинська",
             "Дніпропетровська",
@@ -34,7 +35,8 @@ public class InMemoryRegionProvider implements RegionProvider {
             "Автономна Республіка Крим"
     );
 
-    public Set<String> getAllRegions() {
+    @Override
+    public List<String> getAllRegions() {
         return regions;
     }
 }

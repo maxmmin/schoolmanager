@@ -1,7 +1,7 @@
 package io.github.maxmmin.brdo.schoolmanager.service;
 
-import java.util.Set;
+import java.util.List;
 
 public interface RegionProvider {
-    Set<String> getAllRegions();
+    List<String> getAllRegions();
 }
