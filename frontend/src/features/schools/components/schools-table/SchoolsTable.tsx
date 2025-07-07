@@ -63,7 +63,7 @@ export const SchoolsTable: FC = () => {
             }
 
             <Modal visible={schoolDeactivationModalProps.visible}
-                   text={`Ви впевнені, що хочете деактивувати школу ${schoolDeactivationModalProps.school?.name}?`}
+                   text={`Ви впевнені, що хочете деактивувати школу '${schoolDeactivationModalProps.school?.name}'?`}
                    onConfirm={async () => {
                        setPending(true);
                        try {

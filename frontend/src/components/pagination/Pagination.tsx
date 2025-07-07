@@ -26,9 +26,9 @@ export const Pagination: React.FC<PaginationProps> = ({
     };
 
     const goToPage = () => {
-        if (inputPage >= 0 && inputPage <= totalPages - 1) {
+        if (inputPage > 0 && inputPage < totalPages) {
             setPage(inputPage - 1);
-        }
+        } else setInputPage(page + 1);
     };
 
     return (
