@@ -1,7 +1,7 @@
 CREATE SEQUENCE schools_seq START WITH 1 INCREMENT BY 50;
 
 CREATE TABLE schools (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY DEFAULT nextval('schools_seq'),
     name VARCHAR(128) NOT NULL,
     edrpou VARCHAR(8) NOT NULL,
     region VARCHAR NOT NULL,
