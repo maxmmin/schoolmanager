@@ -12,5 +12,6 @@
 ### How to launch
 - cp env.template .env
 - docker compose up -d
+- go to http://localhost:8899 (or any other address NGINX listening to, depending on your config)
 
 <small>You can edit .env to change some env properties such as database credentials etc</small>
