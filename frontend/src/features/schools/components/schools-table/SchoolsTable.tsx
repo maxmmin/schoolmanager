@@ -61,7 +61,7 @@ export const SchoolsTable: FC = () => {
             }
 
             {
-                schools.elements == 0 && <p style={{"padding": "0 1rem"}}>За вашим запитом не знайдено жодної школи</p>
+                schools.elements === 0 && <p style={{"padding": "0 1rem"}}>За вашим запитом не знайдено жодної школи</p>
             }
 
             <Modal visible={schoolDeactivationModalProps.visible}
