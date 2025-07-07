@@ -65,7 +65,10 @@ export const Pagination: React.FC<PaginationProps> = ({
             <div className={"pagination-container__page-size-selector"}>
                 <label>
                     Кількість на сторінку:{" "}
-                    <select value={size} onChange={(e) => setSize(Number(e.target.value))}>
+                    <select value={size} onChange={(e) => {
+                        setPage(0);
+                        setSize(Number(e.target.value));
+                    }}>
                         {[5, 10, 20, 50].map((n) => (
                             <option key={n} value={n}>
                                 {n}
